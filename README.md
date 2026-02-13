@@ -25,6 +25,7 @@ This repository contains production-ready configuration files for FreeBSD system
 - DNS and DHCP services via dnsmasq
 - NFS and Samba file sharing
 - SSH server with fail2ban brute-force protection
+- Hotsport and jail suppport
 
 ### System Optimization
 - ZFS filesystem with SSD optimizations
@@ -32,10 +33,11 @@ This repository contains production-ready configuration files for FreeBSD system
 - CPU thermal monitoring and power management
 - Security hardening through sysctl parameters
 
-### Virtualization
+### Virtualization && Container
 - bhyve hypervisor support
 - libvirt integration for VM management
 - Device passthrough capabilities
+- Jail container support
 
 ## File Structure
 
@@ -48,6 +50,7 @@ etc/
   rc.conf           - System and service configuration
   sysctl.conf       - Kernel runtime parameters
   ipfw.rules        - Firewall ruleset
+  jail.conf         - Jail container configuration
   fstab             - Filesystem mount table
   devfs.rules       - Device filesystem permissions
   motd.template     - Message of the day template
@@ -117,3 +120,4 @@ Before deploying, ensure you modify:
 This configuration collection is provided **as-is** for reference and adaptation to your specific FreeBSD deployment.
 
 This project is licensed under the **BSD 2-Clause License**. See the [LICENSE](LICENSE) file for the full license text.
+
