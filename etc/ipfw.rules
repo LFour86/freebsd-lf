@@ -27,6 +27,7 @@ ipfw -q nat 1 config if $ext_if reset same_ports
 # Verification: Check your 'ifconfig' output to ensure names match
 hotspot_if="wlan0"      # Hotspot interface (e.g., ifconfig wlan0 create wlandev rtwn0)
 hotspot_net="192.168.1.0/24"
+jail_net="192.168.56.0/24"      # Example jail network (adjust as needed, see ifconfig)
 
 # --- Loopback Interface ---
 $cmd 10 allow all from any to any via lo0
@@ -42,6 +43,8 @@ $cmd 49 reass all from any to any in
 $cmd 50 nat 1 ip from $hotspot_net to any out via $ext_if
 # Inbound NAT: Reverse translation for returning traffic
 $cmd 51 nat 1 ip from any to $ext_if in via $ext_if
+# NAT for jails outbound
+$cmd 55 nat 1 ip from $jail_net to any out via $ext_if
 
 # --- State Verification ---
 # Check existing dynamic rules created by 'keep-state'
@@ -57,6 +60,10 @@ $cmd 120 deny ip from any to any frag
 $cmd 150 allow ip from $hotspot_net to any in via $hotspot_if
 # Allow traffic returning to clients exiting via the hotspot interface
 $cmd 151 allow ip from any to $hotspot_net out via $hotspot_if
+# Allow outbound from jails (via host)
+$cmd 160 allow ip from $jail_net to any out keep-state
+# Allow return traffic to jails
+$cmd 161 allow ip from any to $jail_net in
 
 # --- Outbound Traffic (Local System) ---
 # Allow all traffic originating from this machine and track its state
