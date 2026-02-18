@@ -1,0 +1,187 @@
+{
+  "group/extras": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 400,
+      "children-class": "extras",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "custom/menu",
+      "tray"
+    ]
+  },
+  "custom/cachy": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "kitty",
+    "on-click-right": "alacritty"
+  },
+  "custom/workspaces": {
+    "on-click": "activate"
+  },
+  "cpu": {
+    "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}",
+    "format-icons": [
+      "▁",
+      "▂",
+      "▃",
+      "▄",
+      "▅",
+      "▆",
+      "▇",
+      "█"
+    ],
+    "interval": 1,
+    "states": {
+      "normal": 0,
+      "warning": 50,
+      "critical": 80
+    },
+    "tooltip": true,
+    "on-click": "kitty -e btm"
+  },
+  "cpu#usage": {
+    "interval": 2,
+    "format": "CPU: {usage}%",
+    "states": {
+      "normal": 0,
+      "warning": 50,
+      "critical": 80
+    },
+    "tooltip": true,
+    "tooltip-format": "Freq: {avg_frequency}GHz / {max_frequency}GHz"
+  },
+  "memory": {
+    "interval": 2,
+    "format": "MEM: {percentage}%",
+    "states": {
+      "normal": 0,
+      "warning": 50,
+      "critical": 80
+    },
+    "tooltip": true,
+    "tooltip-format": "Memory: {used}/{total} GiB"
+  },
+  "temperature": {
+    "interval": 2,
+    "format": "TEM: {temperatureC}°C",
+    "states": {
+      "normal": 0,
+      "warning": 50,
+      "critical": 80
+    },
+    "tooltip": false
+  },
+  "disk": {
+    "interval": 30,
+    "format": "DSK: {percentage_used}%",
+    "path": "/",
+    "states": {
+      "normal": 0,
+      "warning": 50,
+      "critical": 80
+    },
+    "tooltip": true,
+    "tooltip-format": "Disk: {used} / {total} (Free: {free})"
+  },
+  "clock": {
+    "interval": 1,
+    "format": "{:%H:%M:%S %p}",
+    "format-alt": "{:%a, %b %d}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+  },
+  "mpris": {
+    "format": "{status_icon}",
+    "format-paused": "{status_icon}",
+    "status-icons": {
+      "playing": "󰐊",
+      "paused": "󰏤",
+      "stopped": "󰓛"
+    },
+    "interval": 1,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "on-click-middle": "playerctl previous",
+    "tooltip": true,
+    "tooltip-format": "{title}"
+  },
+  "custom/menu": {
+    "format": "",
+    "tooltip": false
+  },
+  "tray": {
+    "spacing": 12,
+    "reverse-direction": true,
+    "icon-size": 16,
+    "show-passive-items": false
+  },
+  "network": {
+    "format-wifi": "WIFI: {essid}",
+    "format-ethernet": "ETH: re0",
+    "format-disconnected": "WIFI: disconnected",
+    "format-disabled": "WIFI: disabled",
+    "interval": 5,
+    "tooltip-format": "{gwaddr}",
+    "on-click": "rfkill toggle wifi",
+    "on-click-right": "nm-connection-editor",
+    "tooltip": true,
+    "max-length": 20
+  },
+  "bluetooth": {
+    "interval": 5,
+    "format-on": "BT: on",
+    "format-off": "BT: off",
+    "format-disabled": "BT: disabled",
+    "format-connected": "BT: {device_alias}",
+    "tooltip": true,
+    "tooltip-format": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_address} | Battery: {device_battery_percentage}%",
+    "on-click": "rfkill toggle bluetooth",
+    "on-click-right": "blueman-manager"
+  },
+  "pulseaudio#microphone": {
+    "format": "MIC: {format_source}",
+    "format-source": "on",
+    "format-source-muted": "mute",
+    "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+    "tooltip": false
+  },
+  "pulseaudio": {
+    "interval": 2,
+    "format": "VOL: {volume}%",
+    "format-muted": "VOL: mute",
+    "on-click-right": "pwvucontrol",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "reverse-scrolling": true,
+    "tooltip": true,
+    "tooltip-format": "Volume: {volume}%\n{desc}",
+    "ignored-sinks": ["Easy Effects Sink"]
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "BRI: {percent}%",
+    "reverse-scrolling": true,
+    "smooth-scrolling-threshold": 0.1,
+    "tooltip": false
+  },
+  "battery": {
+    "interval": 5,
+    "states": {
+      "full": 100,
+      "notfull": 99,
+      "warning": 20,
+      "critical": 10,
+      "plugordie": 5
+    },
+    "format-charging": "BAT: {capacity}% chg",
+    "format-full": "BAT: {capacity}% full",
+    "format-notfull": "BAT: {capacity}% dc",
+    "format-plugged": "BAT: {capacity}% ac",
+    "format-plugordie": "BAT: {capacity}% ggs",
+    "format-warning": "BAT: {capacity}% low",
+    "format-critical": "BAT: {capacity}% crit",
+    "tooltip": false
+  }
+}

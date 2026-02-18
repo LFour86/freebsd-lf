@@ -1,0 +1,47 @@
+/* ========================= Semantic Color Table ========================= */
+/* Base */
+@define-color background #FBD0B5;
+/* Foreground (primary text) */
+@define-color foreground #5C4A1D;
+/* Foreground soft (secondary text) */
+@define-color foreground-soft #7A6735;
+/* Button background */
+@define-color button #FAE7DC;
+/* Border color */
+@define-color border #98CAEA;
+
+/* ===== Semantic Status Colors ===== */
+/* Success / normal / connected */
+@define-color success #4FA37C;
+@define-color success-soft #6FBF8E;
+
+/* Info / active / playing */
+@define-color info #5FA8A0;
+@define-color info-soft #8FCBC5;
+
+/* Warning */
+@define-color warning #E89B3A;
+
+/* Error / danger / critical */
+@define-color error #D96C6C;
+
+/* Disabled / offline / unavailable */
+@define-color disabled #B8A77A;
+
+/* Tooltip background */
+@define-color tooltip-bg #FBD0B5;
+
+/* ===== Module Specific Colors ===== */
+/* Backlight */
+@define-color backlight #ACB204;
+
+/* Network */
+@define-color net-wifi #87CEFA;
+@define-color net-ethernet #87CEEB;
+@define-color net-disabled #B8A77A;
+
+/* Battery */
+@define-color battery-full #4FA37C;
+@define-color battery-charging #5FA8A0;
+@define-color battery-warning #E89B3A;
+@define-color battery-critical #D96C6C;

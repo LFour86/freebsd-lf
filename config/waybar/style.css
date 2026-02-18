@@ -1,0 +1,189 @@
+@import "./colors.css";
+
+/* Global */
+* {
+  font-family: "Maple Mono NF CN";
+  font-size: 14px;
+}
+
+window#waybar {
+  background: transparent;
+}
+
+/* Hover effects for interactive modules */
+#custom-cachy:hover,
+#cpu:hover,
+#network:hover,
+#bluetooth:hover,
+#pulseaudio:hover,
+#pulseaudio.microphone:hover,
+#cpu.usage:hover,
+#memory:hover,
+#temperature:hover,
+#disk:hover,
+#pulseaudio.sink-muted:hover {
+  opacity: 0.6;
+}
+
+/* Default module styling */
+#custom-cachy,
+#cpu,
+#clock,
+#mpris,
+#custom-menu,
+#tray,
+#network,
+#bluetooth,
+#pulseaudio,
+#pulseaudio.microphone,
+#battery,
+#custom-powermenu {
+  color: @foreground;
+  padding: 0 6px;
+  margin: 0 4px;
+}
+
+/* Workspaces */
+#workspaces {
+  margin-left: 4px;
+}
+
+#workspaces button {
+  color: @foreground-soft;
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+#workspaces button:hover {
+  color: @foreground;
+  background: @button;
+  opacity: 1;
+}
+
+#workspaces button.active {
+  color: @foreground;
+  font-weight: bold;
+}
+
+/* MPRIS player states */
+#mpris.playing {
+  color: @info;
+}
+
+#mpris.paused {
+  color: @warning;
+}
+
+#mpris.stopped {
+  color: @disabled;
+}
+
+/* Network states */
+#network.disabled {
+  color: @net-disabled;
+}
+
+#network.wifi {
+  color: @net-wifi;
+}
+
+#network.ethernet {
+  color: @net-ethernet;
+}
+
+/* Bluetooth states */
+#bluetooth.disabled {
+  color: @disabled;
+}
+
+#bluetooth.connected {
+  color: @success;
+}
+
+/* PulseAudio */
+#pulseaudio {
+  color: @foreground;
+}
+
+#pulseaudio.sink-muted:not(.microphone) {
+  color: @warning;
+}
+
+#pulseaudio.microphone.source-muted {
+  color: @warning;
+}
+
+/* Backlight */
+#backlight {
+  color: @backlight;
+  padding: 0 6px;
+  margin: 0 4px;
+}
+
+/* Battery states */
+#battery.plugged,
+#battery.full {
+  color: @battery-full;
+}
+
+#battery.charging {
+  color: @battery-charging;
+}
+
+#battery.warning,
+#battery.plugordie {
+  color: @battery-warning;
+}
+
+#battery.critical {
+  color: @battery-critical;
+}
+
+/* CPU (default bar graph) */
+#cpu {
+  color: @foreground;
+  padding: 0 6px;
+  margin: 0 4px;
+}
+
+#cpu.warning {
+  color: @warning;
+}
+
+#cpu.critical {
+  color: @error;
+}
+
+/* CPU usage, memory, temperature, disk (percentage modules) */
+#cpu.usage,
+#memory,
+#temperature,
+#disk {
+  color: @foreground;
+  padding: 0 6px;
+  margin: 0 4px;
+}
+
+#cpu.usage.warning,
+#memory.warning,
+#temperature.warning,
+#disk.warning {
+  color: @warning;
+}
+
+#cpu.usage.critical,
+#memory.critical,
+#temperature.critical,
+#disk.critical {
+  color: @error;
+}
+
+/* Tooltip */
+tooltip *,
+tooltip {
+  color: @foreground;
+  text-shadow: none;
+  margin: 4px;
+  background: @tooltip-bg;
+}
