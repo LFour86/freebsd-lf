@@ -1,0 +1,94 @@
+#!/bin/sh
+# FreeBSD IPFW Workstation Rules
+# Logic: Allow all outgoing, allow NAT for hotspot clients, deny unsolicited incoming
+# Dynamic Internet Detection: Prioritize default route (re0 or wifibox0)
+
+ipfw -q -f flush
+cmd="ipfw -q add"
+
+# --- Dynamic Detection of External Interface (ext_if) ---
+# Try to determine the internet-facing interface from the default route
+ext_if=$(route get default | grep interface | awk '{print $2}' 2>/dev/null)
+
+if [ -z "$ext_if" ]; then
+    # Fallback logic if no default route is found (assuming re0 has priority)
+    if ifconfig re0 >/dev/null 2>&1; then
+        ext_if="re0"
+    else
+        ext_if="wifibox0"
+    fi
+fi
+
+# --- NAT Configuration ---
+# Bind NAT instance 1 to the dynamically detected external interface
+ipfw -q nat 1 config if $ext_if reset same_ports
+
+# --- Variable Definitions ---
+# Verification: Check your 'ifconfig' output to ensure names match
+hotspot_if="wlan0"      # Hotspot interface (e.g., ifconfig wlan0 create wlandev rtwn0)
+hotspot_net="100.66.243.0/24"
+jail_net="100.66.243.0/24"      # Example jail network (adjust as needed, see ifconfig)
+
+# --- Loopback Interface ---
+$cmd 10 allow all from any to any via lo0
+$cmd 11 deny all from any to 127.0.0.0/8
+$cmd 12 deny all from 127.0.0.0/8 to any
+
+# --- Packet Reassembly ---
+# Handle fragmented packets before they reach the NAT engine
+$cmd 49 reass all from any to any in
+
+# --- Network Address Translation (NAT) ---
+# Outbound NAT: Translate traffic originating from the hotspot network
+$cmd 50 nat 1 ip from $hotspot_net to any out via $ext_if
+# Inbound NAT: Reverse translation for returning traffic
+$cmd 51 nat 1 ip from any to $ext_if in via $ext_if
+# NAT for jails outbound
+$cmd 55 nat 1 ip from $jail_net to any out via $ext_if
+
+# --- State Verification ---
+# Check existing dynamic rules created by 'keep-state'
+$cmd 100 check-state
+
+# --- Anti-Scanning & Attack Mitigation ---
+$cmd 110 deny tcp from any to any tcpflags syn,fin
+$cmd 111 deny tcp from any to any tcpflags syn,rst
+$cmd 120 deny ip from any to any frag
+
+# --- Hotspot Client Traffic (Routing) ---
+# Allow traffic from clients entering via the hotspot interface
+$cmd 150 allow ip from $hotspot_net to any in via $hotspot_if
+# Allow traffic returning to clients exiting via the hotspot interface
+$cmd 151 allow ip from any to $hotspot_net out via $hotspot_if
+# Allow outbound from jails (via host)
+$cmd 160 allow ip from $jail_net to any out keep-state
+# Allow return traffic to jails
+$cmd 161 allow ip from any to $jail_net in
+
+# --- Outbound Traffic (Local System) ---
+# Allow all traffic originating from this machine and track its state
+$cmd 200 allow all from me to any keep-state
+
+# --- Essential Services (DHCP & DNS) ---
+# DHCP Handshake: Handle server and client roles
+$cmd 400 allow udp from any 67 to me 68 in
+$cmd 401 allow udp from any 68 to me 67 in
+$cmd 410 allow udp from me 68 to any 67 out
+$cmd 411 allow udp from me 67 to any 68 out
+
+# DNS for Hotspot clients (Allowing clients to use this machine as a DNS resolver)
+$cmd 420 allow udp from $hotspot_net to me 53 in via $hotspot_if
+$cmd 421 allow udp from me 53 to $hotspot_net out via $hotspot_if
+
+# ICMP (Ping) & mDNS (Service Discovery)
+$cmd 500 allow icmp from any to any icmptypes 0,3,8,11
+$cmd 600 allow udp from any to any 5353
+
+# --- Cleanup & Default Deny ---
+# Silently drop NetBIOS/SMB noise without logging to prevent log bloat
+$cmd 990 deny udp from any to any 137,138,139,445 in
+$cmd 991 deny tcp from any to any 137,138,139,445 in
+
+# Default Deny: Block and log all other unsolicited traffic
+$cmd 999 deny log all from any to any
+

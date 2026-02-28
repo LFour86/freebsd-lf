@@ -1,0 +1,206 @@
+# i3 config file
+# autor: LFour86@github
+# Created time: 2026-2-25
+
+# Font
+font pango:Maple Mono NF CN 8
+
+# Start XDG autostart .desktop files using dex.
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+
+# User application
+exec --no-startup-id "fcitx5 -d"
+exec_always feh --bg-fill ~/Pictures/Wallpapers/4.png
+#exec_always picom -f 
+
+# Monitor
+exec_always xrandr --output HDMI-0 --mode 1920x1080 --rate 100 --pos 0x0 --output DP-4 --mode 1920x1080 --rate 144 --pos 1920x0
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Define color
+set $bgcolor     	#01060e 
+set $in-bgcolor  	#0a0e14
+set $text        	#bfbdb6
+set $u-bgcolor   	#f07178
+set $indicator   	#ef863d
+set $in-text     	#5c6773
+set $focused-ws  	#ef863d
+set $bar-color   	#01060e
+set $focused-text 	#01060e
+
+# Client       		 	Border         Background     	Text         	Indicator     	Child_border
+client.focused          	$bgcolor        $bgcolor        $text           $indicator      $bgcolor
+client.unfocused        	$in-bgcolor     $in-bgcolor     $in-text        $in-bgcolor     $in-bgcolor
+client.focused_inactive 	$in-bgcolor     $in-bgcolor     $in-text        $in-bgcolor     $in-bgcolor
+client.urgent           	$u-bgcolor      $u-bgcolor      $text           $u-bgcolor      $u-bgcolor
+
+# Define keys
+set $Mod Mod4
+set $up Up
+set $down Down
+set $left Left
+set $right Right
+
+# Drag floating windows
+floating_modifier $Mod
+
+# Drag windows: title bar or $Mod+click
+tiling_drag modifier titlebar
+
+# Start a terminal
+bindsym $Mod+z exec kitty
+
+# Kill focused window
+bindsym $Mod+x kill
+
+# Start dmenu
+bindsym $Mod+space exec --no-startup-id dmenu_run
+
+# Change focus
+bindsym $Mod+Left focus left
+bindsym $Mod+Down focus down
+bindsym $Mod+Up focus up
+bindsym $Mod+Right focus right
+
+# Move focused window
+bindsym $Mod+Shift+$left move left
+bindsym $Mod+Shift+$down move down
+bindsym $Mod+Shift+$up move up
+bindsym $Mod+Shift+$right move right
+
+# Split in horizontal orientation
+bindsym $Mod+h split h
+
+# Split in vertical orientation
+bindsym $Mod+v split v
+
+# Enter fullscreen mode for the focused container
+bindsym $Mod+Shift+f fullscreen toggle
+
+# Change container layout
+bindsym $Mod+s layout stacking
+bindsym $Mod+w layout tabbed
+bindsym $Mod+e layout toggle split
+
+# Toggle tiling / floating
+bindsym $Mod+f floating toggle
+
+# Change focus between tiling / floating windows
+bindsym $Mod+t focus mode_toggle
+
+# Focus the parent container
+bindsym $Mod+a focus parent
+
+# Focus the child container
+bindsym Mod1+d focus child
+
+# Move the currently focused window to the scratchpad
+bindsym $Mod+Shift+minus move scratchpad
+
+# Cycle scratchpad windows
+bindsym $Mod+minus scratchpad show
+
+# Screenshot
+bindsym Print exec --no-startup-id scrot -d 1 ~/Pictures/ScreenShot/i3-screenshot-%Y%m%d-%H%M%S.png
+bindsym $Mod+Print exec --no-startup-id flameshot gui
+
+# User applications
+## Linuxuator
+bindsym $Mod+Mod1+q exec "/compat/linux/opt/QQ/qq --no-sandbox --in-process-gpu %U"
+bindsym $Mod+Mod1+w exec "/compat/linux/opt/wechat/wechat"
+bindsym $Mod+Mod1+l exec "/compat/linux/opt/lceda-pro/lceda-pro %f --no-sandbox"
+bindsym $Mod+Mod1+s exec "/compat/linux/home/lfour/SoftWares/STM32Cube/STM32CubeMX %U"
+
+## Pkg
+bindsym $Mod+b exec chrome
+
+# Define workspace name
+set $ws1 "1:  Terminal"
+set $ws2 "2:  Browser"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch to workspace
+bindsym $Mod+1 workspace number $ws1
+bindsym $Mod+2 workspace number $ws2
+bindsym $Mod+3 workspace number $ws3
+bindsym $Mod+4 workspace number $ws4
+bindsym $Mod+5 workspace number $ws5
+bindsym $Mod+6 workspace number $ws6
+bindsym $Mod+7 workspace number $ws7
+bindsym $Mod+8 workspace number $ws8
+bindsym $Mod+9 workspace number $ws9
+bindsym $Mod+0 workspace number $ws10
+
+# Move to workspace
+bindsym $Mod+Shift+1 move container to workspace number $ws1
+bindsym $Mod+Shift+2 move container to workspace number $ws2
+bindsym $Mod+Shift+3 move container to workspace number $ws3
+bindsym $Mod+Shift+4 move container to workspace number $ws4
+bindsym $Mod+Shift+5 move container to workspace number $ws5
+bindsym $Mod+Shift+6 move container to workspace number $ws6
+bindsym $Mod+Shift+7 move container to workspace number $ws7
+bindsym $Mod+Shift+8 move container to workspace number $ws8
+bindsym $Mod+Shift+9 move container to workspace number $ws9
+bindsym $Mod+Shift+0 move container to workspace number $ws10
+
+# Allocate applications to workspace
+for_window [class="firefox"] move to workspace $ws2
+for_window [class="Chromium-browser"] move to workspace $ws2
+
+# Reload the configuration file
+bindsym $Mod+Shift+l reload
+
+# Restart i3 inplace 
+bindsym Mod1+Shift+r restart
+
+# Exit i3
+bindsym Mod1+Shift+escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# Resize window 
+mode "resize" {
+    # Resize: left/right shrink/grow width, up/down shrink/grow height
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or Mod1+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym Mod1+r mode "default"
+}
+
+bindsym $Mod+r mode "resize"
+
+# Start i3bar
+bar {
+    status_command i3status -c /home/lfour/.config/i3/i3status.conf
+    i3bar_command i3bar
+    font pango:Maple Mono NF CN 8
+    position    top
+    colors {
+                background $bar-color
+                separator #2d3640
+                # Action                Border          Background      Text
+                focused_workspace       $focused-ws     $focused-ws     $focused-text
+                active_workspace        $in-bgcolor     $in-bgcolor     $in-text
+                inactive_workspace      $in-bgcolor     $in-bgcolor     $in-text
+                urgent_workspace        $u-bgcolor      $u-bgcolor      $text   
+        }
+}
+

@@ -1,0 +1,32 @@
+#!/bin/sh
+# Suggested filename: ~/.config/labwc/lock (or ~/bin/lock-ayu)
+# Make executable: chmod +x this_file
+
+WALLPAPER="$HOME/Pictures/Wallpapers/4.png"
+
+swaylock \
+  --image "$WALLPAPER" \
+  --effect-blur 9x5               `# Blur strength` \
+  --effect-vignette 0.3:0.3       `# Optional light vignette for immersion (remove if unwanted)` \
+  \
+  --color 0A0E14                  `# Fallback background color` \
+  \
+  --inside-color 0A0E1488         `# Inner indicator (semi-transparent dark)` \
+  --ring-color E6B450             `# Ring (gold)` \
+  --key-hl-color FF8F40           `# Keypress highlight (bright gold/orange)` \
+  --bs-hl-color F07178            `# Backspace/error highlight (red)` \
+  \
+  --line-color 00000000           `# Invisible line` \
+  --separator-color 00000000      `# No separator` \
+  \
+  --text-color CBCCC6             `# All text: time, date, Verifying, Wrong, layout` \
+  \
+  --clock \
+  --indicator \
+  --indicator-radius 120          `# Indicator size` \
+  --indicator-thickness 10        `# Ring thickness` \
+  \
+  --timestr "%H:%M:%S" \
+  --datestr "%A, %Y-%m-%d" \
+  --fade-in 0.2 &                 `# Fade-in animation`
+

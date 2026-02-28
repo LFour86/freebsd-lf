@@ -1,0 +1,8 @@
+# Device			Mountpoint						FStype			Options			Dump		Pass#
+#- Host -#
+/dev/gpt/efiboot0		/boot/efi						msdosfs			rw			2		2
+/dev/nda1p2.eli			none							swap			sw			0		0
+tmpfs 				/tmp							tmpfs 			rw 			0 		0
+proc				/proc							procfs			rw			0		0
+fdesc				/dev/fd							fdescfs			rw			0		0
+

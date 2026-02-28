@@ -1,0 +1,30 @@
+#!/bin/sh
+
+STATE_FILE="$HOME/.config/labwc/scripts/current_brightness"
+STEP=0.1
+MIN=0.1
+MAX=1.0
+
+if [ -f "$STATE_FILE" ]; then
+    current=$(cat "$STATE_FILE")
+    if ! echo "$current" | grep -qE '^(0\.[0-9]|1\.0)$'; then
+        current=1.0
+    fi
+else
+    current=1.0
+fi
+
+new=$(echo "$current + $STEP" | bc)
+if [ "$(echo "$new > $MAX" | bc)" -eq 1 ]; then
+    new=$MAX
+fi
+new=$(printf "%.1f" "$new")
+
+pkill gammastep 2>/dev/null
+
+sleep 1
+
+gammastep -l 30.67:104.07 -t 6500:6500 -b "$new:$new" -o -m wayland:output=eDP-1 &
+gammastep -l 30.67:104.07 -t 6500:6500 -b "$new:$new" -o -m wayland:output=HDMI-A-1 &
+
+echo "$new" > "$STATE_FILE"

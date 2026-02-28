@@ -1,0 +1,12 @@
+anchor=top-right
+width=350
+default-timeout=5000
+background-color=#0A0E14cc
+text-color=#CBCCC6
+border-color=#E6B45088
+border-size=2
+border-radius=10
+padding=12
+font=Maple Mono NF 10
+progress-color=source #5FA8A0
+

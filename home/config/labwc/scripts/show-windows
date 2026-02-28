@@ -1,0 +1,5 @@
+#!/bin/sh
+wlrctl window list state:minimized | while IFS=':' read -r app_id title; do
+    wlrctl window focus "app_id:$app_id" state:minimized
+done
+

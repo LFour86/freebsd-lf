@@ -1,0 +1,4 @@
+XCURSOR_THEME=M200
+XCURSOR_SIZE=48
+LD_LIBMAP       libGLX.so       libGL-NVIDIA.so
+                libGLX.so.0     libGL-NVIDIA.so.1

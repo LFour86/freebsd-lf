@@ -1,0 +1,115 @@
+{
+  "reload_style_on_change": true,
+  "layer": "top",
+  "position": "top",
+  "height": 28,
+  "margin-top": 0,
+  "margin-bottom": 0,
+  "margin-left": 0,
+  "margin-right": 0,
+  "spacing": 4,
+
+  "modules-left": [
+    "wlr/workspaces",
+    "tray",
+    "wlr/taskbar"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "idle_inhibitor",
+    "cpu",
+    "memory",
+    "temperature",
+    "battery"
+  ],
+
+  // Modules
+  "cpu": {
+    "interval": 2,
+    "format": "CPU {usage}%",
+    "states": {
+      "warning": 50,
+      "critical": 80
+    },
+    "tooltip": true,
+    "tooltip-format": "Freq: {avg_frequency}GHz"
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": "MEM {percentage}%",
+    "states": {
+      "warning": 70,
+      "critical": 90
+    },
+    "tooltip": true,
+    "tooltip-format": "{used}/{total} GiB"
+  },
+
+  "temperature": {
+    "interval": 5,
+    "format": "TEMP {temperatureC}°C",
+    "critical-threshold": 80,
+    "tooltip": false
+  },
+
+  "clock": {
+    "interval": 1,
+    "format": "{:%H:%M:%S}",
+    "format-alt": "{:%Y-%m-%d %a}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+  },
+
+  "battery": {
+    "interval": 10,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "BAT {capacity}%",
+    "format-charging": "CHG {capacity}%",
+    "format-full": "BAT {capacity}% full",
+    "tooltip": false
+  },
+
+  "tray": {
+    "spacing": 10,
+    "icon-size": 18,
+    "show-passive-items": true
+  },
+
+  "idle_inhibitor": {
+	"format": "{icon}",
+	"format-icons": {
+		"activated": "   ",
+		"deactivated": "   "
+	},
+	"timeout": 30.5
+  },
+
+  "wlr/taskbar": {
+    "all-outputs": true,
+    "format": "{icon} {title:.20}",
+    "on-click": "minimize-raise",
+    "tooltip": true,
+    "icon-size": 24
+  },
+
+  "wlr/workspaces": {
+	"format": "{name}: {icon}",
+	"format-icons": {
+		"1": "  ",
+		"2": "  ",
+		"3": "  ",
+		"4": "  ",
+		"5": "  ",
+		"active": "  ",
+		"default": "  "
+	},
+	"sort-by-number": true
+  }
+
+}
+

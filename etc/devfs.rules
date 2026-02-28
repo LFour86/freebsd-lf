@@ -1,0 +1,31 @@
+[localrules=10]
+    # --- Graphics & Video Acceleration ---
+    # Access for GPU, DRM, and Hardware Rendering
+    add path 'dri/*' mode 0666 group video
+    add path 'drm/*' mode 0666 group video
+
+    # --- Generic USB & Low-level Hardware ---
+    # Essential for libusb, logic analyzers, and custom USB devices
+    add path 'usb'     mode 0770 group operator
+    add path 'usb/*'   mode 0660 group operator
+    add path 'ugen*'   mode 0660 group operator
+
+    # --- Embedded Development & Debugging ---
+    # Serial/UART bridges (CH340, CP2102, FT232)
+    add path 'cua*'    mode 0660 group dialer
+    add path 'ttyU*'   mode 0660 group dialer
+
+    # --- Human Interface & Specialized Tools ---
+    # HID-based debuggers, programmers, and raw USB input
+    add path 'hidraw*' mode 0660 group operator
+
+[gpu_jail_rules=11]
+    add include $devfsrules_hide_all
+    add include $devfsrules_unhide_basic
+    add include $devfsrules_unhide_login
+    add path 'nvidia*'     mode 0660 group wheel unhide
+    add path 'nvidiactl'   mode 0660 group wheel unhide
+    add path 'cuda*'       mode 0660 group wheel unhide
+    add path 'dri/*'       mode 0660 group video unhide
+    add path 'drm/*'       mode 0660 group video unhide
+

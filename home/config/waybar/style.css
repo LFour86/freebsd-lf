@@ -1,0 +1,83 @@
+* {
+  font-family: "Maple Mono NF CN";
+  font-size: 13px;
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+
+window#waybar {
+  background: rgba(10, 14, 20, 0.85);
+  color: #CBCCC6;
+  border-bottom: 1px solid #1A212E; 
+}
+
+#cpu, #memory, #temperature, #clock, #battery, #tray {
+  padding: 0 10px;
+  margin: 0 2px;
+  color: #CBCCC6;
+}
+
+#cpu.warning, #memory.warning, #temperature.warning {
+  color: #FF8F40;
+}
+
+#cpu.critical, #memory.critical, #temperature.critical {
+  color: #F07178;
+}
+
+#battery.warning {
+  color: #FF8F40;
+}
+
+#battery.critical {
+  color: #F07178;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  to { opacity: 0.6; }
+}
+
+/* Button */
+#workspaces button {
+  padding: 0 8px;
+  margin: 0 2px;
+  color: #CBCCC6;
+}
+
+#workspaces button.active {
+  color: #95E6CB;
+  font-weight: bold;
+}
+
+#workspaces button:hover {
+  background: rgba(30, 40, 60, 0.4);
+}
+
+/* Tray */
+#tray {
+  padding-right: 8px;
+}
+
+/* Hover */
+*:hover {
+  background: rgba(30, 40, 60, 0.4);
+  transition: 0.2s;
+}
+
+/* Clock */
+#clock {
+  font-weight: bold;
+  color: #95E6CB;
+}
+
+/* Tooltip */
+tooltip {
+  background: #0F1419;
+  border: 1px solid #1A212E;
+  border-radius: 6px;
+  padding: 8px;
+  color: #CBCCC6;
+}
+

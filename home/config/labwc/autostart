@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Monitor
+wlr-randr --output HDMI-A-1 --mode 1920x1080@99.999001Hz --pos 0,0 --output eDP-1 --mode 1920x1080@144.001007Hz --pos 1920,0 &
+
+# Wallpaper
+swww-daemon &
+swww img ~/Pictures/Wallpapers/4.png &
+
+# Bar
+waybar >/dev/null 2>&1 &
+
+# Notifications
+mako &
+
+# Clipboard
+clipman &
+
+# Wait for waybar
+sleep 2 &
+
+# Fcitx5
+fcitx5 -d &
+
+# Idle
+swayidle -w timeout 3600 '~/.config/labwc/lock' timeout 3900 'wlopm --off "*"' resume 'wlopm --on "*"' &
+
