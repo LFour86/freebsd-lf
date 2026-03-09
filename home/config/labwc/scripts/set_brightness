@@ -1,0 +1,21 @@
+#!/bin/sh
+
+STATE_FILE="$HOME/.config/labwc/scripts/current_brightness"
+DEFAULT=1.0
+
+if [ -f "$STATE_FILE" ]; then
+    current=$(cat "$STATE_FILE")
+    if ! echo "$current" | grep -qE '^(0\.[0-9]|1\.0)$'; then
+        current=$DEFAULT
+    fi
+else
+    current=$DEFAULT
+fi
+
+pkill gammastep 2>/dev/null
+
+sleep 1
+
+gammastep -l 30.67:104.07 -t 6500:6500 -b "$current:$current" -o -m wayland:output=eDP-1 &
+gammastep -l 30.67:104.07 -t 6500:6500 -b "$current:$current" -o -m wayland:output=HDMI-A-1 &
+

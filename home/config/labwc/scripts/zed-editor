@@ -1,0 +1,4 @@
+export GDK_BACKEND=x11
+sleep 1
+zedit
+

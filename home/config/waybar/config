@@ -91,7 +91,7 @@
 
   "wlr/taskbar": {
     "all-outputs": true,
-    "format": "{icon} {title:.20}",
+    "format": "{icon} {title:.5}",
     "on-click": "minimize-raise",
     "tooltip": true,
     "icon-size": 24
