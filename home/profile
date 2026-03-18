@@ -29,7 +29,7 @@ if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi
 #if [ -x /usr/bin/fortune ] ; then /usr/bin/fortune freebsd-tips ; fi
 
 # PATH
-export PATH=/usr/local/llvm22/bin:/usr/local/gcc-arm-embedded-14.2.rel1/bin:$PATH
+export PATH=/home/lfour/.local/share/bin:/usr/local/llvm22/bin:/usr/local/gcc-arm-embedded-14.2.rel1/bin:$PATH
 
 # C/C++
 export C_INCLUDE_PATH=/usr/local/include:$C_INCLUDE_PATH
@@ -56,4 +56,3 @@ export GLFW_IM_MODULE=fcitx
 
 # Go Mirrors
 export GOPROXY=https://mirrors.aliyun.com/goproxy/,direct
-
