@@ -20,7 +20,7 @@ hint.attimer.0.irq="0"
 hint.acpi_throttle.0.disabled="1"
 hint.p4tcc.0.disabled="1"
 
-# Realtek ALC257 for Lenovo Legion R7000
+# Realtek ALC257
 hint.hdaa.1.nid20.config="as=1 seq=0 device=Speaker conn=Fixed ctype=Analog loc=Internal color=Unknown misc=0"
 hint.hdaa.1.nid33.config="as=1 seq=1 device=Headphones conn=Jack ctype=1/8 loc=Right color=Black misc=0"
 hint.hdaa.1.nid25.config="as=4 seq=0 device=Mic conn=Jack ctype=1/8 loc=Right color=Black misc=0"

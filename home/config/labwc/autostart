@@ -8,16 +8,13 @@ waybar >/dev/null 2>&1 &
 
 # Wallpaper
 swww-daemon &
-swww img ~/Pictures/Wallpapers/4.png &
+swww img ~/.config/labwc/wallpaper/atri.png &
 
 # Brightness
 sh ~/.config/labwc/scripts/set_brightness &
 
 # Notifications
 mako &
-
-# Clipboard
-clipman &
 
 sleep 1 &
 
@@ -26,4 +23,3 @@ fcitx5 -d &
 
 # Idle
 swayidle -w timeout 3600 '~/.config/labwc/lock' timeout 3900 'wlopm --off "*"' resume 'wlopm --on "*"' &
-

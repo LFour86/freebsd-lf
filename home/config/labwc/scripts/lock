@@ -2,7 +2,7 @@
 # Suggested filename: ~/.config/labwc/lock (or ~/bin/lock-ayu)
 # Make executable: chmod +x this_file
 
-WALLPAPER="$HOME/Pictures/Wallpapers/4.png"
+WALLPAPER="$HOME/.config/labwc/wallpaper/atri.png"
 
 swaylock \
   --image "$WALLPAPER" \
@@ -29,4 +29,3 @@ swaylock \
   --timestr "%H:%M:%S" \
   --datestr "%A, %Y-%m-%d" \
   --fade-in 0.2 &                 `# Fade-in animation`
-

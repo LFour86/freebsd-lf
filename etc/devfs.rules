@@ -10,6 +10,11 @@
     add path 'usb/*'   mode 0660 group operator
     add path 'ugen*'   mode 0660 group operator
 
+    # --- NVIDIA ---
+    add path 'nvidia*'   mode 0666 group video
+    add path 'nvidiactl'  mode 0666 group video
+    add path 'nvidia-modeset' mode 0666 group video
+
     # --- Embedded Development & Debugging ---
     # Serial/UART bridges (CH340, CP2102, FT232)
     add path 'cua*'    mode 0660 group dialer

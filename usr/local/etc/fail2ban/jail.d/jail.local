@@ -3,9 +3,7 @@
 [DEFAULT]
 # Global/default settings applied to all jails
 # Whitelist these IP ranges (never ban them)
-ignoreip = 127.0.0.1/8 ::1 192.168.0.0/16 fe80::/10 \
-           #your host IPv4 \
-           #your host IPv6
+ignoreip = 127.0.0.1/8 ::1 192.168.0.0/16 fe80::/10
 
 # How long a ban lasts (1 day = 86400 seconds)
 # Use -1 for permanent ban
@@ -28,6 +26,10 @@ banaction_allports = pf[actiontype=<allports>]
 [sshd]
 enabled  = true
 port     = ssh
-filter   = bsd-sshd               # FreeBSD-specific filter
-logpath  = %(sshd_log)s           # Usually resolves to /var/log/auth.log
-maxretry = 3                      # Be more strict on SSH than the global default
+# FreeBSD-specific filter
+filter   = bsd-sshd               
+# Usually resolves to /var/log/auth.log
+logpath  = %(sshd_log)s          
+# Be more strict on SSH than the global default
+maxretry = 3                      
+

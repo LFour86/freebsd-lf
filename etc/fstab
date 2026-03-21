@@ -1,7 +1,15 @@
-# Device			    Mountpoint						FStype			Options			Dump		Pass#
+# Device			    	Mountpoint						FStype			Options				Dump			Pass#
 #- Host -#
-/dev/gpt/efiboot0		/boot/efi						msdosfs			rw			    2		    2
-/dev/nda1p2.eli			none							swap			sw			    0		    0
-tmpfs 				    /tmp							tmpfs 			rw 			    0 		    0
-proc				    /proc							procfs			rw			    0		    0
-fdesc				    /dev/fd							fdescfs			rw			    0		    0
+/dev/gpt/efiboot0			/boot/efi						msdosfs			rw			    	2		    	2
+/dev/nda1p2.eli				none							swap			sw			    	0		    	0
+tmpfs 				    	/tmp							tmpfs 			rw 			    	0 		    	0
+proc				    	/proc							procfs			rw			    	0		    	0
+fdesc				    	/dev/fd							fdescfs			rw			    	0		    	0
+
+#- Linux Compat for CUDA -#
+tmpfs      				/compat/cuda/tmp        				tmpfs       		rw,mode=1777    		0    			0
+devfs      				/compat/cuda/dev        				devfs       		rw              		0    			0
+fdescfs    				/compat/cuda/dev/fd     				fdescfs     		rw,linrdlnk     		0    			0
+linprocfs  				/compat/cuda/proc       				linprocfs   		rw              		0    			0
+linsysfs   				/compat/cuda/sys        				linsysfs    		rw              		0    			0
+
