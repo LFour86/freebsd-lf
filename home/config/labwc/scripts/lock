@@ -2,7 +2,7 @@
 # Suggested filename: ~/.config/labwc/lock (or ~/bin/lock-ayu)
 # Make executable: chmod +x this_file
 
-WALLPAPER="$HOME/.config/labwc/wallpaper/atri.png"
+WALLPAPER="$HOME/.config/labwc/wallpaper/caicaizi.png"
 
 swaylock \
   --image "$WALLPAPER" \
