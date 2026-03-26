@@ -1,12 +1,11 @@
 #!/bin/sh
-# Suggested filename: ~/.config/labwc/lock (or ~/bin/lock-ayu)
+# Suggested filename: ~/.config/labwc/lock
 # Make executable: chmod +x this_file
 
 WALLPAPER="$HOME/.config/labwc/wallpaper/caicaizi.png"
 
 swaylock \
   --image "$WALLPAPER" \
-  --effect-blur 9x5               `# Blur strength` \
   --effect-vignette 0.3:0.3       `# Optional light vignette for immersion (remove if unwanted)` \
   \
   --color 0A0E14                  `# Fallback background color` \
@@ -28,4 +27,5 @@ swaylock \
   \
   --timestr "%H:%M:%S" \
   --datestr "%A, %Y-%m-%d" \
-  --fade-in 0.2 &                 `# Fade-in animation`
+  --fade-in 0.2                	  `# Fade-in animation`
+

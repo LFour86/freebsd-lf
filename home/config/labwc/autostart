@@ -22,4 +22,8 @@ sleep 1 &
 fcitx5 -d &
 
 # Idle
-swayidle -w timeout 3600 '~/.config/labwc/lock' timeout 3900 'wlopm --off "*"' resume 'wlopm --on "*"' &
+swayidle -w \
+    timeout 3600 '~/.config/labwc/lock' \
+    timeout 3900 'wlopm --off "*"' \
+    resume 'wlopm --on "*"; pgrep swaylock || ~/.config/labwc/lock' &
+
